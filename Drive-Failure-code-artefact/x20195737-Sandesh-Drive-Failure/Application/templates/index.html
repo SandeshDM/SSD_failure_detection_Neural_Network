@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disk Failure Prediction</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e; /* Dark background for contrast */
+            color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            background: #282828; /* Slightly lighter background for the container */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #ff5722; /* Stylish orange for the title */
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-size: 14px;
+            color: #f2f2f2;
+        }
+        input[type="number"] {
+            padding: 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 12px;
+            background-color: #4caf50; /* Green for submit button */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        .prediction {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ff9800; /* Orange for the prediction box */
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Disk Failure Prediction Tool</h2>
+        <form method="post">
+            {% for column in input_columns %}
+            <div>
+                <label for="{{ column }}">{{ column.replace('_', ' ').title() }}:</label>
+                <input type="number" step="any" id="{{ column }}" name="{{ column }}" required>
+            </div>
+            {% endfor %}
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_message %}
+        <div class="prediction">{{ prediction_message }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
